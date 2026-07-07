@@ -68,6 +68,11 @@ def scheduled_competitor_check():
     except Exception as e:
         logger.error(f"Error in scheduled check: {e}")
 
+@app.get("/")
+def root():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/docs")
+
 @app.get("/health")
 @limiter.limit("60/minute")
 def health_check(request: Request):
